@@ -14,9 +14,15 @@ var healthy = true
 
 // Handlers
 
-app.get(prefix + '/', (req, res) => {
-  res.send('This is ' + appName);
+app.get('/', (req, res) => {
+  res.send('This is root of ' + appName);
 });
+
+if(prefix) {
+  app.get(prefix + '/', (req, res) => {
+    res.send('This is prefixed root ' + appName);
+  });
+}
 
 app.get(prefix + '/health', (req, res) => {
   if(healthy) {
