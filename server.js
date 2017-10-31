@@ -2,7 +2,7 @@
 
 const express = require('express');
 
-const port = process.env.APP_port || 8080;
+const port = process.env.APP_PORT || 80;
 const host = '0.0.0.0';
 
 const appName = process.env.APP_NAME || 'Fail App'
