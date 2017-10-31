@@ -5,6 +5,7 @@ const express = require('express');
 const port = process.env.APP_PORT || 80;
 const host = '0.0.0.0';
 
+const prefix = process.env.APP_URL_PREFIX || ''
 const appName = process.env.APP_NAME || 'Fail App'
 
 const app = express();
@@ -13,11 +14,11 @@ var healthy = true
 
 // Handlers
 
-app.get('/', (req, res) => {
+app.get(prefix + '/', (req, res) => {
   res.send('This is ' + appName);
 });
 
-app.get('/health', (req, res) => {
+app.get(prefix + '/health', (req, res) => {
   if(healthy) {
     res.send('Healthy')
   } else {
@@ -26,17 +27,17 @@ app.get('/health', (req, res) => {
   }
 })
 
-app.get('/make-healthy', (req, res) => {
+app.get(prefix + '/make-healthy', (req, res) => {
   healthy = true
   res.send('Made healthy')
 })
 
-app.get('/make-unhealthy', (req, res) => {
+app.get(prefix + '/make-unhealthy', (req, res) => {
   healthy = false
   res.send('Made unhealthy')
 })
 
-app.get('/fail', (req, res) => {
+app.get(prefix + '/fail', (req, res) => {
   res.send('Failing now')
   console.log('Failing due to request')
   process.exit()
