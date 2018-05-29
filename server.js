@@ -18,6 +18,15 @@ app.get('/', (req, res) => {
   res.send('This is root of ' + appName);
 });
 
+app.get('/client-ip', (req, res) => {
+  var ip = req.headers['x-forwarded-for'] ||
+           req.connection.remoteAddress ||
+           req.socket.remoteAddress ||
+           (req.connection.socket ? req.connection.socket.remoteAddress : null);
+
+  res.send('Client IP address for the request: ' + ip);
+});
+
 if(prefix) {
   app.get(prefix + '/', (req, res) => {
     res.send('This is prefixed root ' + appName);
