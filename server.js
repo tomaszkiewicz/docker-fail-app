@@ -27,6 +27,10 @@ app.get('/client-ip', (req, res) => {
   res.send('Client IP address for the request: ' + ip);
 });
 
+app.get('/headers', (req, res) => {
+  res.send(req.headers);
+});
+
 if(prefix) {
   app.get(prefix + '/', (req, res) => {
     res.send('This is prefixed root ' + appName);
